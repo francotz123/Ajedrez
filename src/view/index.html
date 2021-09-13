@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajedrez - Xubio</title>
+    <link rel="shortcut icon" href="../image/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../style/style.css" />
+  </head>
+  <body>
+    <div class="background-gradient container">
+      <div class="wrap">
+        <header>
+          <svg
+            id="return"
+            width="30"
+            height="30"
+            viewBox="0 0 30 30"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M26.25 45C26.25 38.7891 21.2109 33.75 15 33.75C8.78906 33.75 3.75 38.7891 3.75 45C3.75 51.2109 8.78906 56.25 15 56.25C21.2109 56.25 26.25 51.2109 26.25 45Z"
+              stroke="white"
+              stroke-miterlimit="10"
+            />
+            <path
+              d="M10.6072 15H20.0391M14.6121 19.6875L9.96094 15L14.6121 10.3125V19.6875Z"
+              stroke="#D6D6D6"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <div class="logo">
+            <img id="logo" src="../image/favicon.png" />
+            <h1 id="title">Ajedrez Xubio</h1>
+            <h3 id="description">
+              by <a href="https://github.com/ndri92/"></a> ·
+              <img src="../image/logo-github.svg" />
+            </h3>
+          </div>
+
+          <h2 id="roomID"></h2>
+        </header>
+
+        <div id="result"></div>
+
+        <div class="room">
+          <div id="form">
+            <div class="newGame">
+              <button id="new">Crear Partida</button>
+            </div>
+            <div id="line"></div>
+            <div class="joinGame">
+              <h4>Conectarse</h4>
+              <div class="rooms"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="game">
+          <div class="table"></div>
+          <h3 id="turn">
+            Esperando conexión
+            <div class="dot-carousel"></div>
+          </h3>
+        </div>
+      </div>
+    </div>
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../socket.io/socket.io.js"></script>
+    <script src="../js/player.js"></script>
+    <script src="../js/game.js"></script>
+    <script src="../js/room.js"></script>
+    <script src="../js/chess.js"></script>
+  </body>
+</html>

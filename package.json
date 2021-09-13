@@ -1,0 +1,22 @@
+{
+  "name": "cinco-en-linea",
+  "version": "1.0.0",
+  "description": "Hackaton - Xubio",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ./server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ndri",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jquery": "^3.6.0",
+    "js-chess-engine": "^0.11.3",
+    "socket.io": "^1.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "js-chess-engine": "^0.11.3"
+  }
+}
