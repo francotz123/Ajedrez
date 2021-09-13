@@ -201,7 +201,7 @@ class Game {
     var i_j;
     var idCell;
     socket.emit("placePieces");
-    game.clearAllPieces();
+    //game.clearAllPieces();
     socket.on("places", (data) => {
 
      /*  Object.keys(data.chess.pieces).forEach(position => {
