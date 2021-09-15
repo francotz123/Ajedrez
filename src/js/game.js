@@ -134,8 +134,6 @@ class Game {
         } else {
           player.setTurn(true);
         }
-        from = null;
-        to = null;
       }
 
       /**
@@ -150,6 +148,9 @@ class Game {
           clearInterval(timer);
            if(posicionAnterior != " " && posicionSiguiente !=" "){
             clickHandler(e);
+          }else{
+             posicionAnterior = " ";
+             posicionSiguiente = " ";
           }
         } else {
           game.clearFirstPosition(posicionAnterior);
@@ -160,6 +161,7 @@ class Game {
     }
 
     function clickHandler(e) {
+ 
       let row, col;
 
       row = game.getRow(e.target.id);
