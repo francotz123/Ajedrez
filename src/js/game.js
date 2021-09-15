@@ -55,8 +55,8 @@ class Game {
 
       if(posicionAnterior == " " && posicionSiguiente != " "){
         posicionSiguiente = " ";
+        player.setTurn(true);
         return;
-        
       }
       
       //RESETEO DE POSICIONES
