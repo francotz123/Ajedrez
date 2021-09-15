@@ -118,13 +118,9 @@ class Game {
           }
           colSiguiente = col;
           rowSiguiente = row;
-          if(posicionAnterior != " " && posicionSiguiente !=" "){
-            game.updateBoard("#52AE32", row, col, e.target.id);
-          }
-        } 
-
-       
-        if (posicionAnterior != " " && posicionSiguiente != " ") {
+      
+           game.updateBoard("#52AE32", row, col, e.target.id);
+           if (posicionAnterior != " " && posicionSiguiente != " ") {
           const from = letter[colAnterior] + number[rowAnterior];
           const to = letter[colSiguiente] + number[rowSiguiente];
           console.log(from, to);
@@ -135,6 +131,11 @@ class Game {
         } else {
           player.setTurn(true);
         }
+         
+        } 
+
+       
+       
       }
 
       /**
