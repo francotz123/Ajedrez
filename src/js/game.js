@@ -54,7 +54,9 @@ class Game {
       col = game.getCol(e.target.id);
 
       if(posicionAnterior == " " && posicionSiguiente != " "){
+        posicionSiguiente = " ";
         return;
+        
       }
       
       //RESETEO DE POSICIONES
