@@ -59,6 +59,7 @@ io.on("connection", (socket) => {
     try {
       chessgame.move(data.from, data.to);
 
+      
 
       socket.broadcast.to(data.room).emit("turnPlayed", {
         previusTile: data.previusTile,
@@ -90,9 +91,6 @@ io.on("connection", (socket) => {
         });
    */
 
-
-      
-
       if(getCheckMate()){
         socket.broadcast.emit("checkMate", {
           value: true,
@@ -113,16 +111,9 @@ io.on("connection", (socket) => {
           value: true,
         });
       }
-
-
-      socket.broadcast.to(data.room).emit("historyToRoom", `${data.from} - ${data.to}`);
-      socket.emit("historyToGame", `${data.from} - ${data.to}`)
-      
     } catch (error) {
       console.log(error);
     }
-
-   
   });
 
   /**
@@ -186,6 +177,25 @@ io.on("connection", (socket) => {
       chess: chessgame.exportJson(),
     });
  });
+
+ /**
+  * 
+  * Recibe el pedido de historial y lo envia todos
+  */
+ socket.on("requestHistory", (data) => {
+  let movements = [];
+  chessgame.getHistory().reverse().forEach(mov => {
+      geto = mov.from;
+      movements.push(
+        `<br> ${mov.from} - ${mov.to}`
+      )
+  });
+  socket.to(data.room).emit("historyToRoom", movements);
+  socket.emit("historyToGame", movements)
+
+  //socket.to(data.room).emit("historyToRoom", `${chessgame.getHistory()[0].from} - ${chessgame.getHistory()[0].to}`);
+  //socket.emit("historyToGame", `${chessgame.getHistory()[0].from} - ${chessgame.getHistory()[0].to}`)
+ })
 
  socket.on("checkServer", (data) => {
   socket.broadcast.to(data.room).emit("checkPlayer2", data)
