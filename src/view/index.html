@@ -41,10 +41,15 @@
               by <a href="https://github.com/ndri92/"></a> ·
               <img src="../image/logo-github.svg" />
             </h3>
+            
           </div>
 
           <h2 id="roomID"></h2>
         </header>
+
+        
+        
+
 
         <div id="result"></div>
 
@@ -62,15 +67,35 @@
         </div>
 
         <div class="game">
+          <div class="side-bar" style="display: none;">
+            <div class="player"></div>
+            <h5 class="time">⧗Tiempo 10:00</h5>
+          </div>
+          
+          <div class="side-history" style="display: none;">
+            <h2>Historial</h2>
+            <div class="over">
+
+            </div>
+          </div>
+
           <div class="table"></div>
           <h3 id="turn">
             Esperando conexión
-            <div class="dot-carousel"></div>
+           <div class="dot-carousel"></div>
           </h3>
         </div>
       </div>
     </div>
-
+    <audio class="audio">
+      <source src="../audios/newgame.mp3" type="audio/ogg">
+  </audio>
+  <audio class="audioMove">
+    <source src="../audios/move.mp3" type="audio/ogg">
+  </audio>
+  <audio class="audioCheck">
+    <source src="../audios/move.mp3" type="audio/ogg">
+  </audio>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../socket.io/socket.io.js"></script>
     <script src="../js/player.js"></script>

@@ -40,7 +40,7 @@ io.on("connection", (socket) => {
     var room = io.sockets.adapter.rooms[data.room];
 
     if (room.length !== 1) {
-      socket.emit("err", { message: "Partida cerrada" });
+      socket.emit("err", { message: "Partida comenzada" });
     } else {
       socket.join(data.room);
       socket.broadcast.to(data.room).emit("playerOne");
@@ -53,13 +53,12 @@ io.on("connection", (socket) => {
    *  ESTE SOCKET EFECTUA EL MOVIMIENTO EN EL JUEGO
    */
   socket.on("turn", (data) => {
-    //const myArr = data.from.split("");
-    //console.log(data.from + " " + myArr[0] + 3);
-    //myArr[0]+(myArr[2]+1)
+
     const checked = true;
 
     try {
       chessgame.move(data.from, data.to);
+
 
       socket.broadcast.to(data.room).emit("turnPlayed", {
         previusTile: data.previusTile,
@@ -77,8 +76,11 @@ io.on("connection", (socket) => {
 
       let movements = [];
       let cont = 0;
+
+      /*
       chessgame.getHistory().forEach((mov) => {
-        getTo = mov.from;
+
+         getTo = mov.from;
         movements.push({
           from: mov.from,
           to: mov.to,
@@ -86,11 +88,10 @@ io.on("connection", (socket) => {
           piece: mov.configuration.pieces[getTo],
           number: cont++,
         });
-  
-        socket.broadcast.to(data.room).emit("history", {
-          movements,
-        });
-      });
+   */
+
+
+      
 
       if(getCheckMate()){
         socket.broadcast.emit("checkMate", {
@@ -99,6 +100,24 @@ io.on("connection", (socket) => {
         });
       }
 
+      if (getCheck()) {
+          socket.emit("check", {
+            value: chessgame.exportJson().check,
+            color: getColorPlayer(),
+            position: getCheckKing(),
+          })
+      }
+
+      if(getEmpate()){
+        socket.emit("empate", {
+          value: true,
+        });
+      }
+
+
+      socket.broadcast.to(data.room).emit("historyToRoom", `${data.from} - ${data.to}`);
+      socket.emit("historyToGame", `${data.from} - ${data.to}`)
+      
     } catch (error) {
       console.log(error);
     }
@@ -111,14 +130,13 @@ io.on("connection", (socket) => {
    *  ESTE SOCKET CHECKEA EL MOVIMIENTO Y EMITE LE DA EL PERMISO AL clickHandler(e) de las tiles por medio de un clickHandlerChecked(e)
    */
   socket.on("checkMovement", (data) => {
-
-    
     if (chessgame.moves(data.from).indexOf(data.to) >= 0) {
       socket.emit("movementChecked", {
         from: data.from,
         to: data.to,
         checked: true,
         checkMate: getCheckMate(),
+        isFinished: getEmpate(),
       });
     } else {
       socket.emit("movementChecked", {
@@ -126,10 +144,10 @@ io.on("connection", (socket) => {
         to: data.to,
         checked: false,
         checkMate: getCheckMate(),
+        isFinished: getEmpate(),
       });
       socket.emit("movementIlegal", data);
     }
-
    
   });
 
@@ -169,6 +187,10 @@ io.on("connection", (socket) => {
     });
  });
 
+ socket.on("checkServer", (data) => {
+  socket.broadcast.to(data.room).emit("checkPlayer2", data)
+});
+
 });
 
 
@@ -181,7 +203,30 @@ function getCheckMate(){
   return  chessgame.exportJson().checkMate;
 }
 
+function getEmpate() {
+  return (chessgame.exportJson().isFinished && !(chessgame.exportJson().checkMate)) || (chessgame.exportJson().halfMove == 50);
+}
+
+function getCheck() {
+  return chessgame.exportJson().check;
+}
+
+function getCheckKing() {
+  var pieces = chessgame.exportJson().pieces;
+  if (getCheck() && (getColorPlayer() == "white")) {
+    return getKeyByValue(pieces,"K")
+  }
+   if (getCheck() && (getColorPlayer() == "black")) {
+     return getKeyByValue(pieces, "k")
+   }
+}
+
+
+function getKeyByValue(object, value) {
+  return Object.keys(object).find(key => object[key] === value);
+}
 function getColorPlayer(){
   return  chessgame.exportJson().turn;
 }
+
 httpServer.listen(PORT);

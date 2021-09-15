@@ -2,7 +2,7 @@ class Player {
   constructor(color) {
     this.color = color;
     this.turn = false;
-    this.time = 15;
+    this.time = 600;
   }
 
   getColor() {
@@ -19,7 +19,7 @@ class Player {
 
   setTurn(turn) {
     this.currentTurn = turn;
-    this.time = 15;
+    //this.time = 15;
     if (turn) {
       $("#turn").text("Es tu turno");
     } else {

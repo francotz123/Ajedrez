@@ -15,9 +15,11 @@ body {
   font-family: circe, Arial, Helvetica, sans-serif;
 }
 body .background-gradient {
-  background: linear-gradient(140deg, #009eba, #48ad42, #cac34a, #d33473);
-  background-size: 800% 800%;
-  animation: background 10s ease infinite;
+  background: linear-gradient(72.36deg, #0F3547 1.88%, #004874 53.89%);
+
+
+ background-size: 800% 800%;
+  /*animation: background 10s ease infinite;*/
 }
 body .container {
   align-items: center;
@@ -73,6 +75,54 @@ body .container .wrap header .logo #description a:hover {
   text-decoration: underline;
   color: #fff;
 }
+
+body .container .wrap .game .side-bar{
+  float: left;
+  width: 100px;
+  box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.75);
+  background: #006D7C;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 30px;
+  border: 2px solid #d0d0d0;
+  border-radius: 10px;
+  
+}
+
+body .container .wrap .game .side-bar #white{
+  color: white;
+}
+
+body .container .wrap .game .side-bar #black{
+  color: black;
+}
+
+
+body .container .wrap .game .time{
+
+  color: white;
+}
+
+.over{
+  overflow: auto;
+  width: 6em;
+  height: 12em;
+  
+}
+body .container .wrap .game .side-history{
+  float: right;
+  width: 100px;
+  text-align: center;
+  box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.75);
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 30px;
+  background: #006D7C;
+  border: 2px solid #d0d0d0;
+  color: white;
+  border-radius: 10px;
+}
+
 
 
 body .container .wrap header .logo #description img {
@@ -184,7 +234,7 @@ body .container .wrap .game {
   display: none;
 }
 body .container .wrap .game .table {
-  display: inline-block;
+  display:inline-block;
   padding: 5px;
   background-color: #c5c1bd;
   border-radius: 5px;
