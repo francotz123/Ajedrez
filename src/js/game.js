@@ -177,7 +177,7 @@ class Game {
               i2 = posicion2[0];
               j2 = posicion2[2]; 
             
-              console.log(posicion1,posicion2,i,j,"-",i2,j2,(i + j) % 2 == 0,(i2 + j2) % 2 == 0);
+              console.log(posicion1,posicion2,i,j,"-",i2,j2,(i + j) % 2,(i2 + j2) % 2,(i + j) % 2 == 0,(i2 + j2) % 2 == 0);
              if((i + j) % 2 == 0) {
               $(`#${posicionAnteriorAux}`).css("background-color", `${theme.light}`);
             }else {
