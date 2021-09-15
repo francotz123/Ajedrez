@@ -160,7 +160,7 @@ class Game {
 
       row = game.getRow(e.target.id);
       col = game.getCol(e.target.id);
-
+      console.log("ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAA");
       if (!player.getTurn() || !game) {
         return;
       }
