@@ -177,15 +177,15 @@ class Game {
                 j2 = letter.indexOf(posicion2[0]); 
               
                if ((i + j) % 2 == 0) {
-                $(`#${posicionAnteriorAux}`).css("background-color", `${theme.light}`);
-              } else {
                 $(`#${posicionAnteriorAux}`).css("background-color", `${theme.dark}`);
+              } else {
+                $(`#${posicionAnteriorAux}`).css("background-color", `${theme.light}`);
               }
               
               if ((i2 + j2) % 2 == 0) {
-                $(`#${posicionSiguienteAux}`).css("background-color", `${theme.light}`);
-              } else {
                 $(`#${posicionSiguienteAux}`).css("background-color", `${theme.dark}`);
+              } else {
+                $(`#${posicionSiguienteAux}`).css("background-color", `${theme.light}`);
               }
             }
             
