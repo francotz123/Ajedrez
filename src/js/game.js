@@ -152,7 +152,7 @@ class Game {
             if(posicionAnterior != " " && posicionSiguiente !=" "){
               clickHandler(e);
             }else{
-              console.log("A VER, POSICION ANTERIOR: ",posicionAnterior," POSICION SIGUIENTE: ",posicionSiguiente);
+              //console.log("A VER, POSICION ANTERIOR: ",posicionAnterior," POSICION SIGUIENTE: ",posicionSiguiente);
             }
             
           } else {
@@ -170,7 +170,7 @@ class Game {
 
       row = game.getRow(e.target.id);
       col = game.getCol(e.target.id);
-      console.log("ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+     // console.log("ENTRAAAAAAAAAAAAAAAAAAAAAAAAAAA");
       if (!player.getTurn() || !game) {
         return;
       }
