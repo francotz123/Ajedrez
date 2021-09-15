@@ -151,6 +151,8 @@ class Game {
             clearInterval(timer);
             if(posicionAnterior != " " && posicionSiguiente !=" "){
               clickHandler(e);
+            }else{
+              console.log("A VER, POSICION ANTERIOR: ",posicionAnterior," POSICION SIGUIENTE: ",posicionSiguiente);
             }
             
           } else {
