@@ -185,9 +185,9 @@ class Game {
             }
             
             if((i2 + j2) % 2 == 0) {
-              $(`#${posicionSiguienteAux}`).css("background-color", `${theme.dark}`);
-            }else {
               $(`#${posicionSiguienteAux}`).css("background-color", `${theme.light}`);
+            }else {
+              $(`#${posicionSiguienteAux}`).css("background-color", `${theme.dark}`);
             }
           }
         } else {
