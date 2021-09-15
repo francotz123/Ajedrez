@@ -1,4 +1,4 @@
-const socket = io.connect("https://ejemploajedrez.herokuapp.com/");
+const socket = io.connect("localhost:3977");
 var player, game;
 
 init = () => {
@@ -84,21 +84,15 @@ init = () => {
 
     game.clearBoard(data.tile, data.previusTile);
 
-    if(data.nextTile != " " &&  data.previusTile != " "){
-      
-      game.updateBoard("#52AE32", row, col, data.nextTile);
-      game.updateBoard(
-        "#8dba7d",
-        data.previus[0],
-        data.previus[1],
-        data.previusTile
-      );
-      $(".audioMove")[0].play();
-      player.setTurn(true);
-      
-    };
-
-    
+    game.updateBoard("#52AE32", row, col, data.nextTile);
+    game.updateBoard(
+      "#8dba7d",
+      data.previus[0],
+      data.previus[1],
+      data.previusTile
+    );
+    $(".audioMove")[0].play();
+    player.setTurn(true);
   });
 
   socket.on("endGame", (data) => {
