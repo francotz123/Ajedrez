@@ -61,20 +61,20 @@ class Game {
       }
 
       game.isCheck();
-      var pieza1 = game.comprobarColor($(`#${row}_${col}`).html());
+     // var pieza1 = game.comprobarColor($(`#${row}_${col}`).html());
 
       //SE COMPRUEBA QUE LA CASILLA SELECCIONADA TENGA UNA PIEZA
       if (($(`#${row}_${col}`).html() !== " " || clicks > 0)) {
 
 
         //VERIFICA QUE SI SE SELECCIONO OTRA PIEZA DEL MISMO COLOR, RESETEE LOS CLICKS
-         if (clicks == 1 && $(`#${row}_${col}`).html() != " " ) {
-          if ( player.getColor() == game.comprobarColor($(`#${row}_${col}`).html())) {
-            game.clearFirstPosition(posicionAnterior);
-            clicks = 0;
-            return;
-          }
-        }
+        // if (clicks == 1 && $(`#${row}_${col}`).html() != " " ) {
+      //    if ( player.getColor() == game.comprobarColor($(`#${row}_${col}`).html())) {
+        //    game.clearFirstPosition(posicionAnterior);
+         //   clicks = 0;
+         //   return;
+        //  }
+       // }
 
         if (!player.getTurn() || !game) {
           return;
