@@ -1,4 +1,4 @@
-const socket = io.connect("https://ejemploajedrez.herokuapp.com/");
+const socket = io.connect("localhost:3977");
 var player, game;
 
 init = () => {

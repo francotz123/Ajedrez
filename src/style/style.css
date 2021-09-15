@@ -15,10 +15,13 @@ body {
   font-family: circe, Arial, Helvetica, sans-serif;
 }
 body .background-gradient {
-  background: linear-gradient(72.36deg, #0F3547 1.88%, #004874 53.89%);
+  /*background: linear-gradient(72.36deg, #0F3547 1.88%, #004874 53.89%);*/
 
 
- background-size: 800% 800%;
+  background: url(/src/image/fondo.png)no-repeat center;
+
+
+ background-size: 100% 100%;
   /*animation: background 10s ease infinite;*/
 }
 body .container {
@@ -56,6 +59,13 @@ body .container .wrap header .logo #title {
   letter-spacing: 3px;
   text-transform: uppercase;
   font-size: 25px;
+  
+  /* ESTOY TRABAJANDO EN ESO
+  font-family: 'Open Sans', sans-serif !important;;
+  font-size: 30px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  */
 }
 body .container .wrap header .logo #description {
   font-family: circe-light, Arial, Helvetica, sans-serif;
@@ -81,9 +91,13 @@ body .container .wrap .game .side-bar{
   width: 100px;
   box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.75);
   background: #006D7C;
+  /*
   padding-right: 30px;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
   padding-left: 30px;
+  */
+  padding: 1.5rem;
+  margin-bottom: 10px;
   border: 2px solid #d0d0d0;
   border-radius: 10px;
   
@@ -114,16 +128,26 @@ body .container .wrap .game .side-history{
   width: 100px;
   text-align: center;
   box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.75);
+  /*
   padding-right: 30px;
   padding-bottom: 50px;
   padding-left: 30px;
+  */
+  padding: 1.5rem;
   background: #006D7C;
+  /*background:  linear-gradient(331.7deg, #004874 35.42%, #00AFD3 93.78%);*/
   border: 2px solid #d0d0d0;
   color: white;
   border-radius: 10px;
 }
 
+body .container .wrap .game .side-history .title-history {
+  margin-bottom: 0px;
+}
 
+body .container .wrap .game .side-history .p-history {
+  margin-top: 0px;
+}
 
 body .container .wrap header .logo #description img {
   margin-left: 5px;
@@ -199,8 +223,8 @@ body .container .wrap .room #form .newGame {
   width: 100%;
 }
 body .container .wrap .room #form .newGame button {
-  width: 100px;
-  height: 30px;
+  width: 120px;
+  height: 40px;
   background-color: #004874;
   border: none;
   cursor: pointer;
