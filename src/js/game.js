@@ -84,21 +84,21 @@ class Game {
 
         clicks++;
        
-        if (clicks == 1  && player.getColor() == game.comprobarColor($(`#${row}_${col}`).html())) {
+        if (clicks == 1) {
           colAnterior = col;
           rowAnterior = row;
           posicionAnterior = row + "_" + col;
           game.updateBoard("#8dba7d", row, col, e.target.id);
-        }else if (clicks == 2) {
+        }
+        
+        if (clicks == 2) {
           posicionSiguiente = row + "_" + col;
           colSiguiente = col;
           rowSiguiente = row;
           game.updateBoard("#52AE32", row, col, e.target.id);
-        }else{
-          clicks = 0;
-          game.clearFirstPosition(posicionAnterior);
         }
-        console.log("clicks", clicks)
+        
+       // console.log("clicks", clicks)
         if (clicks == 2) {
           const from = letter[colAnterior] + number[rowAnterior];
           const to = letter[colSiguiente] + number[rowSiguiente];
