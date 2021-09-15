@@ -1,4 +1,4 @@
-const socket = io.connect("https://ejemploajedrez.herokuapp.com/");
+const socket = io.connect("localhost:3977");
 var player, game;
 
 init = () => {
@@ -142,8 +142,8 @@ init = () => {
   });
 
   socket.on("historyToRoom", (data) => {
-    $(".over").append(
-      `<p>${data}</p>`
+    $(".over").html(
+      `<p class="p-history">${data}</p>`
     );
   })
 
