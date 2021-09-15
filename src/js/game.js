@@ -2,6 +2,8 @@ var timer;
 var clicks = 0;
 var posicionAnterior = " ";
 var posicionSiguiente = " ";
+var posicionAnteriorAux = " ";
+var posicionSiguienteAux = " ";
 var colAnterior = 0;
 var rowAnterior = 0;
 var colSiguiente = 0;
@@ -105,6 +107,10 @@ class Game {
           colAnterior = col;
           rowAnterior = row;
           posicionAnterior = row + "_" + col;
+          if(posicionAnterior != " "){
+               posicionAnteriorAux = posicionAnterior;
+            }
+          
           game.updateBoard("#8dba7d", row, col, e.target.id);
 
         } 
@@ -112,8 +118,14 @@ class Game {
         if (posicionAnterior != " " && posicionSiguiente == " " ) {
 
           posicionSiguiente = row + "_" + col;
+          
+          if(posicionSiguiente != " "){
+               posicionSiguienteAux = posicionSiguiente;
+            }
+          
           if(posicionAnterior == posicionSiguiente ){
             posicionSiguiente = " ";
+ 
             return;
           }
           colSiguiente = col;
@@ -152,7 +164,29 @@ class Game {
             if(posicionAnterior != " " && posicionSiguiente !=" "){
               clickHandler(e);
             }else{
-              //console.log("A VER, POSICION ANTERIOR: ",posicionAnterior," POSICION SIGUIENTE: ",posicionSiguiente);
+               const letter = ["A", "B", "C", "D", "E", "F", "G", "H"];
+                var i, j, i2 , j2
+                const number = [8, 7, 6, 5, 4, 3, 2, 1, 0];
+
+                var posicion1 = posicionAnteriorAux.split("");
+                var posicion2 = posicionSiguienteAux.split("");
+
+                i = number[posicion1[1]];
+                j = letter.indexOf(posicion1[0]);
+                i2 = number[posicion2[1]];
+                j2 = letter.indexOf(posicion2[0]); 
+              
+               if ((i + j) % 2 == 0) {
+                $(`#${posicionAnteriorAux}`).css("background-color", `${theme.light}`);
+              } else {
+                $(`#${posicionAnteriorAux}`).css("background-color", `${theme.dark}`);
+              }
+              
+              if ((i2 + j2) % 2 == 0) {
+                $(`#${posicionSiguienteAux}`).css("background-color", `${theme.light}`);
+              } else {
+                $(`#${posicionSiguienteAux}`).css("background-color", `${theme.dark}`);
+              }
             }
             
           } else {
