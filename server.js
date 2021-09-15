@@ -122,6 +122,7 @@ io.on("connection", (socket) => {
    */
   socket.on("checkMovement", (data) => {
     console.log("CHECKMOVEMENT, FROM:",data.from," TO", data.to);
+    if(data.from != " " && data.to != " "){
     if (chessgame.moves(data.from).indexOf(data.to) >= 0) {
       socket.emit("movementChecked", {
         from: data.from,
@@ -140,7 +141,7 @@ io.on("connection", (socket) => {
       });
       socket.emit("movementIlegal", data);
     }
-   
+    }
   });
 
   socket.on("end", (data) => {
