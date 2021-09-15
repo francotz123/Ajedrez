@@ -2,6 +2,8 @@ var timer;
 var clicks = 0;
 var posicionAnterior = " ";
 var posicionSiguiente = " ";
+var posicionAnteriorAux = " ";
+var posicionSiguienteAux = " ";
 var colAnterior = 0;
 var rowAnterior = 0;
 var colSiguiente = 0;
@@ -104,7 +106,9 @@ class Game {
           rowAnterior = row;
           posicionAnterior = row + "_" + col;
           
-          posicionAnterior2 = 
+          if(posicionAnterior != " "){
+            posicionAnteriorAux = posicionAnterior;
+          } 
           game.updateBoard("#8dba7d", row, col, e.target.id);
 
         } 
@@ -112,6 +116,11 @@ class Game {
         if (posicionAnterior != " " && posicionSiguiente == " " ) {
 
           posicionSiguiente = row + "_" + col;
+
+          if(posicionSiguiente != " "){
+            posicionSiguienteAux = posicionSiguiente;
+          }
+
           if(posicionAnterior == posicionSiguiente ){
             posicionSiguiente = " ";
             return;
@@ -154,8 +163,33 @@ class Game {
           clearInterval(timer);
           if(posicionAnterior != " " && posicionSiguiente !=" "){
             clickHandler(e);
+          }else{
+             
+              var i, j, i2 , j2
+              
+
+              var posicion1 = posicionAnteriorAux.split("");
+              var posicion2 = posicionSiguienteAux.split("");
+
+              i = posicion1[0];
+              j = posicion1[2];
+            
+              i2 = posicion2[0];
+              j2 = posicion2[2]; 
+            
+              console.log(posicion1,posicion2,i,j,"-",i2,j2,(i + j) % 2 == 0,(i2 + j2) % 2 == 0);
+             if((i + j) % 2 == 0) {
+              $(`#${posicionAnteriorAux}`).css("background-color", `${theme.light}`);
+            }else {
+              $(`#${posicionAnteriorAux}`).css("background-color", `${theme.dark}`);
+            }
+            
+            if((i2 + j2) % 2 == 0) {
+              $(`#${posicionSiguienteAux}`).css("background-color", `${theme.dark}`);
+            }else {
+              $(`#${posicionSiguienteAux}`).css("background-color", `${theme.light}`);
+            }
           }
-          
         } else {
           game.clearFirstPosition(posicionAnterior);
           posicionAnterior = " ";
