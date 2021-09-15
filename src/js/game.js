@@ -134,6 +134,8 @@ class Game {
         } else {
           player.setTurn(true);
         }
+        from = null;
+        to = null;
       }
 
       /**
