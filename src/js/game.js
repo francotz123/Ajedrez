@@ -140,24 +140,24 @@ class Game {
        *
        * Este socket escucha si el movimiento que se quiere hacer es permitido
        */
-      socket.on("movementChecked", (data) => {
+  if(posicionAnterior != " " && posicionSiguiente !=" "){
+        socket.on("movementChecked", (data) => {
 
-        if (data.checked == true) {
-          
-          isStarting = false;
-          clearInterval(timer);
-           if(posicionAnterior != " " && posicionSiguiente !=" "){
-            clickHandler(e);
-          }else{
-             posicionAnterior = " ";
-             posicionSiguiente = " ";
+          if (data.checked == true) {
+            
+            isStarting = false;
+            clearInterval(timer);
+            if(posicionAnterior != " " && posicionSiguiente !=" "){
+              clickHandler(e);
+            }
+            
+          } else {
+            game.clearFirstPosition(posicionAnterior);
+            posicionAnterior = " ";
+            posicionSiguiente = " ";
           }
-        } else {
-          game.clearFirstPosition(posicionAnterior);
-          posicionAnterior = " ";
-          posicionSiguiente = " ";
-        }
-      });
+        });
+       }
     }
 
     function clickHandler(e) {
