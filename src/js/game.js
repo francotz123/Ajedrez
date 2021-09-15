@@ -2,6 +2,8 @@ var timer;
 var clicks = 0;
 var posicionAnterior = " ";
 var posicionSiguiente = " ";
+var posicionAnteriorAux = " ";
+var posicionSiguienteAux = " ";
 var colAnterior = 0;
 var rowAnterior = 0;
 var colSiguiente = 0;
@@ -100,6 +102,9 @@ class Game {
           colAnterior = col;
           rowAnterior = row;
           posicionAnterior = row + "_" + col;
+          if(posicionAnterior != " "){
+            posicionAnteriorAux = posicionAnterior;
+          }
           game.updateBoard("#8dba7d", row, col, e.target.id);
 
         } 
@@ -107,6 +112,10 @@ class Game {
         if (posicionAnterior != " " && posicionSiguiente == " " ) {
 
           posicionSiguiente = row + "_" + col;
+          if(posicionSiguiente != " "){
+            posicionSiguienteAux = posicionSiguiente;
+          }
+
           if(posicionAnterior == posicionSiguiente ){
             posicionSiguiente = " ";
             return;
