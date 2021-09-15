@@ -8,7 +8,7 @@ var colSiguiente = 0;
 var rowSiguiente = 0;
 var i_jaque = 0;
 var j_jaque = 0;
-var i_j_jaque ="";
+var i_j_jaque = "";
 var is_jaque = false;
 var isStarting = false;
 
@@ -49,10 +49,10 @@ class Game {
       let row, col;
       const letter = ["A", "B", "C", "D", "E", "F", "G", "H"];
       const number = [8, 7, 6, 5, 4, 3, 2, 1];
-     
 
       row = game.getRow(e.target.id);
       col = game.getCol(e.target.id);
+
 
       //RESETEO DE POSICIONES
       if (posicionAnterior !== " " && posicionSiguiente !== " ") {
@@ -60,21 +60,32 @@ class Game {
         posicionAnterior = " ";
       }
 
-      game.isCheck();
-     //var pieza1 = game.comprobarColor($(`#${row}_${col}`).html());
+      
+     // var pieza1 = game.comprobarColor($(`#${row}_${col}`).html());
 
       //SE COMPRUEBA QUE LA CASILLA SELECCIONADA TENGA UNA PIEZA
-      if (($(`#${row}_${col}`).html() !== " " || clicks > 0)) {
+      if ($(`#${row}_${col}`).html() !== " " || (posicionAnterior !== " " || posicionSiguiente !== " ")) {
+        //VERIFICA QUE SI SE SELECCIONO OTRA PIEZA DEL MISMO COLOR, RESETEE LAS POSICIONES
+        console.log("Posicion anterior:",posicionAnterior);
+        console.log("Posicion siguiente:",posicionSiguiente);
 
+        /**
+         * 
+         * COMPROBAR SI EL JUGADOR  QUIERE CAMBIAR DE FICHA 
+        */
+        if (posicionSiguiente == " " && posicionAnterior != " ") {
 
-        //VERIFICA QUE SI SE SELECCIONO OTRA PIEZA DEL MISMO COLOR, RESETEE LOS CLICKS
-        // if (clicks == 1 && $(`#${row}_${col}`).html() != " " ) {
-      //    if ( player.getColor() == game.comprobarColor($(`#${row}_${col}`).html())) {
-        //    game.clearFirstPosition(posicionAnterior);
-         //   clicks = 0;
-         //   return;
-        //  }
-       // }
+          if (player.getColor() == game.comprobarColor($(`#${row}_${col}`).html())) {
+
+            game.clearFirstPosition(posicionAnterior);
+            posicionAnterior = " ";
+            return;
+          }
+        }
+
+        /*COMPRUEBA SI ESTA EN JAQUE*/ 
+
+        game.isCheck();
 
         if (!player.getTurn() || !game) {
           return;
@@ -82,24 +93,32 @@ class Game {
 
         $(".table").removeAttr("style");
 
-        clicks++;
-       
-        if (clicks == 1) {
+        //clicks++;
+
+        if (posicionAnterior == " " && posicionSiguiente == " " && player.getColor() == game.comprobarColor($(`#${row}_${col}`).html())) {
+
           colAnterior = col;
           rowAnterior = row;
           posicionAnterior = row + "_" + col;
           game.updateBoard("#8dba7d", row, col, e.target.id);
-        }
+
+        } 
         
-        if (clicks == 2) {
+        if (posicionAnterior != " " && posicionSiguiente == " " ) {
+
           posicionSiguiente = row + "_" + col;
+          if(posicionAnterior == posicionSiguiente ){
+            posicionSiguiente = " ";
+            return;
+          }
           colSiguiente = col;
           rowSiguiente = row;
           game.updateBoard("#52AE32", row, col, e.target.id);
-        }
-        
-       // console.log("clicks", clicks)
-        if (clicks == 2) {
+
+        } 
+
+       
+        if (posicionAnterior != " " && posicionSiguiente != " ") {
           const from = letter[colAnterior] + number[rowAnterior];
           const to = letter[colSiguiente] + number[rowSiguiente];
           console.log(from, to);
@@ -107,7 +126,6 @@ class Game {
             from: from,
             to: to,
           });
-        
         } else {
           player.setTurn(true);
         }
@@ -118,24 +136,23 @@ class Game {
        * Este socket escucha si el movimiento que se quiere hacer es permitido
        */
       socket.on("movementChecked", (data) => {
-        console.log("recibe");
+
         if (data.checked == true) {
-          console.log("checked", data.checked == true);
-          console.log("checkMate: ", data.checkMate);
+          
           isStarting = false;
           clearInterval(timer);
           clickHandler(e);
         } else {
           game.clearFirstPosition(posicionAnterior);
-          clicks = 0;
+          posicionAnterior = " ";
+          posicionSiguiente = " ";
         }
-
       });
     }
 
     function clickHandler(e) {
       let row, col;
-    
+
       row = game.getRow(e.target.id);
       col = game.getCol(e.target.id);
 
@@ -161,37 +178,29 @@ class Game {
         }
       });
 
-      socket.on("empate", (data)=> {
+      socket.on("empate", (data) => {
         if (data.value) {
           game.empate();
         }
-      })
+      });
 
       socket.on("check", (data) => {
         if (data.value) {
         }
       });
-      
+
       isStarting = true;
 
-     
       $(".audioMove")[0].play();
       player.setTurn(false);
 
+      socket.emit("requestHistory", { room: game.getRoom() });
       socket.on("historyToGame", (data) => {
-        console.log(data)
-        $(".over").append(
-          `<p>${data}</p>`
-        );
-
+        $(".over").html(`<p class="p-history">${data}</p>`);
       });
     }
-
     game.createTiles(clickHandlerChecked);
-
-    
   }
-
   createTiles(clickHandlerChecked) {
     for (let i = 0; i < 8; i++) {
       for (let j = 0; j < 7; j++) {
@@ -313,9 +322,7 @@ class Game {
       var time = player.getTime();
       --player.time;
 
-      $(".time").html(
-        `⧗Tiempo: ${game.secondsToString(player.time)}`
-      );
+      $(".time").html(`⧗Tiempo: ${game.secondsToString(player.time)}`);
 
       if (player.getTime() == 0) {
         let message;
@@ -342,11 +349,11 @@ class Game {
     $("#logo").css("display", "none");
     $(".game").css("display", "block");
     $("#roomID").html(message);
+    $(".background-gradient").css("background", "linear-gradient(72.36deg, #0F3547 1.88%, #004874 53.89%)");
     this.createGameBoard();
   }
 
-  updateBoard(color, row, col, tile) {
-    
+   updateBoard(color, row, col, tile) {
     $(`#${tile}`).css("backgroundColor", `${color}`);
     //.prop("disabled", true);
     this.board[row][col] = color[0];
@@ -479,7 +486,6 @@ class Game {
   }
 
   clearBoard(p1, p2) {
-
     for (let i = 0; i < 8; i++) {
       for (let j = 0; j < 7; j++) {
         if (`${i}_${j}` != p1 && `${i}_${j}` != p2) {
@@ -543,12 +549,11 @@ class Game {
         i_jaque = number[posicion[1]];
         j_jaque = letter.indexOf(posicion[0]);
 
-        i_j_jaque = i_jaque + "_" + j_jaque ;
+        i_j_jaque = i_jaque + "_" + j_jaque;
         is_jaque = true;
-      
+
         $(`#${i_j_jaque}`).css("backgroundColor", "#D24379");
-        this.board[i_jaque][j_jaque] =
-          "#D24379";
+        this.board[i_jaque][j_jaque] = "#D24379";
 
         $(".audioCheck")[0].play();
 
@@ -558,44 +563,39 @@ class Game {
           j_jaque: j_jaque,
           i_j_jaque: i_j_jaque,
           is_jaque: is_jaque,
-        })
-
+        });
       }
     });
   }
 
   //DEVUELVE LOS SEGUNDOS EN MINUTOS Y SEG
-   secondsToString(seconds) {
+  secondsToString(seconds) {
     var minute = Math.floor((seconds / 60) % 60);
-    minute = (minute < 10)? '0' + minute : minute;
+    minute = minute < 10 ? "0" + minute : minute;
     var second = seconds % 60;
-    second = (second < 10)? '0' + second : second;
-    return  minute + ':' + second;
+    second = second < 10 ? "0" + second : second;
+    return minute + ":" + second;
   }
 
-  comprobarColor(figura){
-    
-    var color ="";
-    switch(figura){
+  comprobarColor(figura) {
+    var color = "";
+    switch (figura) {
       case "♚":
       case "♛":
       case "♜":
       case "♝":
       case "♞":
       case "♟":
-          color = "black";
-      break;
+        color = "black";
+        break;
       case "♔":
       case "♕":
       case "♖":
       case "♗":
       case "♘":
       case "♙":
-       
-          color = "white";
-      break;
-
-      
+        color = "white";
+        break;
     }
     return color;
   }
