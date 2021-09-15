@@ -146,7 +146,9 @@ class Game {
           
           isStarting = false;
           clearInterval(timer);
-          clickHandler(e);
+           if(posicionAnterior != " " && posicionSiguiente !=" "){
+            clickHandler(e);
+          }
         } else {
           game.clearFirstPosition(posicionAnterior);
           posicionAnterior = " ";
