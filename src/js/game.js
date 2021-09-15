@@ -171,13 +171,13 @@ class Game {
               var posicion1 = posicionAnteriorAux.split("");
               var posicion2 = posicionSiguienteAux.split("");
 
-              i = posicion1[0];
-              j = posicion1[2];
+              i = parseInt(posicion1[0]);
+              j = parseInt(posicion1[2]);
             
-              i2 = posicion2[0];
-              j2 = posicion2[2]; 
+              i2 = parseInt(posicion2[0]);
+              j2 = parseInt(posicion2[2]); 
             
-              console.log(posicion1,posicion2,i,j,"-",i2,j2,(i + j) ,(i2 + j2) ,(i + j) % 2 == 0,(i2 + j2) % 2 == 0);
+              console.log(posicion1,posicion2,i,j,"-",i2,j2,(i + j) % 2 == 0,(i2 + j2) % 2 == 0);
              if((i + j) % 2 == 0) {
               $(`#${posicionAnteriorAux}`).css("background-color", `${theme.light}`);
             }else {
@@ -185,9 +185,9 @@ class Game {
             }
             
             if((i2 + j2) % 2 == 0) {
-              $(`#${posicionSiguienteAux}`).css("background-color", `${theme.light}`);
-            }else {
               $(`#${posicionSiguienteAux}`).css("background-color", `${theme.dark}`);
+            }else {
+              $(`#${posicionSiguienteAux}`).css("background-color", `${theme.light}`);
             }
           }
         } else {
