@@ -192,12 +192,13 @@ class Game {
       isStarting = true;
 
       $(".audioMove")[0].play();
-      player.setTurn(false);
+     
 
       socket.emit("requestHistory", { room: game.getRoom() });
       socket.on("historyToGame", (data) => {
         $(".over").html(`<p class="p-history">${data}</p>`);
       });
+       setInterval(player.setTurn(false), 500);
     }
     game.createTiles(clickHandlerChecked);
   }
