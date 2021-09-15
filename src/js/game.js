@@ -176,7 +176,7 @@ class Game {
               
                 i2 = number[posicion2[1]];
                 j2 = letter.indexOf(posicion2[0]); 
-                console.log(i,j,"-",i2,j2,(i + j) % 2 == 0);
+                console.log(posicion1,posicion2,i,j,"-",i2,j2,(i + j) % 2 == 0);
                if ((i + j) % 2 == 0) {
                 $(`#${posicionAnteriorAux}`).css("background-color", `${theme.light}`);
               } else {
