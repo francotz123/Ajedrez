@@ -118,8 +118,9 @@ class Game {
           }
           colSiguiente = col;
           rowSiguiente = row;
-          game.updateBoard("#52AE32", row, col, e.target.id);
-
+          if(posicionAnterior != " " && posicionSiguiente !=" "){
+            game.updateBoard("#52AE32", row, col, e.target.id);
+          }
         } 
 
        
