@@ -53,7 +53,10 @@ class Game {
       row = game.getRow(e.target.id);
       col = game.getCol(e.target.id);
 
-
+      if(posicionAnterior == " " && posicionSiguiente != " "){
+        return;
+      }
+      
       //RESETEO DE POSICIONES
       if (posicionAnterior !== " " && posicionSiguiente !== " ") {
         posicionSiguiente = " ";
