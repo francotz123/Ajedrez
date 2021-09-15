@@ -164,18 +164,19 @@ class Game {
             if(posicionAnterior != " " && posicionSiguiente !=" "){
               clickHandler(e);
             }else{
-               const letter = ["A", "B", "C", "D", "E", "F", "G", "H"];
+               
                 var i, j, i2 , j2
-                const number = [8, 7, 6, 5, 4, 3, 2, 1, 0];
+                
 
                 var posicion1 = posicionAnteriorAux.split("");
                 var posicion2 = posicionSiguienteAux.split("");
 
-                i = number[posicion1[1]];
-                j = letter.indexOf(posicion1[0]);
+                i = posicion1[0];
+                j = posicion1[2];
               
-                i2 = number[posicion2[1]];
-                j2 = letter.indexOf(posicion2[0]); 
+                i2 = posicion2[0];
+                j2 = posicion2[2]; 
+              
                 console.log(posicion1,posicion2,i,j,"-",i2,j2,(i + j) % 2 == 0);
                if ((i + j) % 2 == 0) {
                 $(`#${posicionAnteriorAux}`).css("background-color", `${theme.light}`);
